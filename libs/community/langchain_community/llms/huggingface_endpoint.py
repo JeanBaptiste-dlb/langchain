@@ -179,10 +179,8 @@ class HuggingFaceEndpoint(LLM):
             )
             login(token=huggingfacehub_api_token)
         except Exception as e:
-            raise ValueError(
-                "Could not authenticate with huggingface_hub. "
-                "Please check your API token."
-            ) from e
+            # Authentication should not be mendatory here, if I run my HF TGI on premise why would I need to authenticate?
+            huggingfacehub_api_token = None
 
         from huggingface_hub import AsyncInferenceClient, InferenceClient
 
